@@ -1,6 +1,7 @@
 import scrapy
-from pep_parse.items import PepParseItem
+
 from pep_parse.constants import PEP_URL
+from pep_parse.items import PepParseItem
 
 
 class PepSpider(scrapy.Spider):
@@ -13,7 +14,7 @@ class PepSpider(scrapy.Spider):
         pep_links = index_tag.css('a::attr(href)').getall()
         for link in pep_links:
             yield response.follow(link, callback=self.parse_pep)
-            
+
     def parse_pep(self, response):
         data = {
             'number': response.css(

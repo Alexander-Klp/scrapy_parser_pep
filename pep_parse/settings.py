@@ -14,4 +14,4 @@ FEEDS = {
         'fields': ['number', 'name', 'status'],
         'overwrite': True
     },
-} 
+}
