@@ -1,7 +1,7 @@
 import csv
 import datetime as dt
 
-from pep_parse.constants import BASE_DIR, DATETIME_FORMAT
+from pep_parse.settings import BASE_DIR, DATETIME_FORMAT
 
 
 class PepParsePipeline:
@@ -18,13 +18,13 @@ class PepParsePipeline:
         with open(file_path, 'w', encoding='utf-8') as f:
             writer = csv.writer(f, dialect='unix')
             f.write('Статус,Количество\n')
-            for status, count in self.results.items():
-                writer.writerow((status, count))
+            writer.writerows(self.results.items())
             f.write(f'Total,{sum(self.results.values())}')
 
     def process_item(self, item, spider):
-        if item['status'] in self.results:
-            self.results[item['status']] += 1
-        else:
-            self.results[item['status']] = 1
+        self.results[item['status']] = self.results.get(item['status'], 0) + 1
+        # if item['status'] in self.results:
+        #     self.results[item['status']] += 1
+        # else:
+        #     self.results[item['status']] = 1
         return item

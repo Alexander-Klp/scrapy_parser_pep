@@ -1,4 +1,13 @@
+from pathlib import Path
+
 BOT_NAME = 'pep_parse'
+
+BASE_DIR = Path(__file__).parent.parent
+DATETIME_FORMAT = '%Y-%m-%d_%H-%M-%S'
+DOMAIN = 'peps.python.org'
+URL = 'https://peps.python.org/'
+NAME = 'pep'
+
 
 SPIDER_MODULES = ['pep_parse.spiders']
 NEWSPIDER_MODULE = 'pep_parse.spiders'
